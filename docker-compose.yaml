@@ -1,0 +1,24 @@
+services:
+  russian-stan-server:
+    # Для поддержки Paper сборок, требующих Java 21, используем соответствующий тег образа
+    image: itzg/minecraft-server:java21-alpine
+    container_name: russian-stan-server
+    environment:
+      # Подтверждаем, что вы принимаете лицензионное соглашение
+      EULA: "true"
+      # Указываем тип сервера – Paper
+      TYPE: PAPER
+      # Указываем требуемую версию Minecraft (Paper автоматически найдёт нужный билд)
+      VERSION: "1.21.4"
+      # Если при запуске версии 1.21.4 выдаётся ошибка "No build found for version 1.21 with channel 'default'",
+      # добавьте переменную PAPER_CHANNEL со значением experimental:
+      PAPER_CHANNEL: experimental
+      # Дополнительный параметр для выделения памяти (по необходимости)
+      MEMORY: "7G"
+    ports:
+      - "25565:25565"
+      - "24454:24454/udp"
+    volumes:
+      # Данные сервера сохраняются в volume "mc-data" на хосте
+      - ./data:/data
+    restart: always
