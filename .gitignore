@@ -26,3 +26,4 @@ data/banned-players.json
 data/.rcon*
 *.dat*
 .*
+data/whitelist.json
